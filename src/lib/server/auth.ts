@@ -10,12 +10,13 @@ const adapter = new DrizzleSQLiteAdapter(db, session, users);
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
 		attributes: {
+			// Set to true when deploying to https
 			secure: !dev
 		}
 	},
 	getUserAttributes: (attributes) => {
 		return {
-			// attributes has the type of DatabaseUserAttributes
+			// User attributes
 			githubId: attributes.github_id,
 			username: attributes.username,
             email: attributes.email,
