@@ -5,7 +5,8 @@ export const users = sqliteTable('user', {
 	github_id: integer('github_id').unique(),
 	username: text('username').unique(),
 	email: text('email').unique(),
-	hashed_password: text('hashed_password')
+	hashed_password: text('hashed_password'),
+	email_verified: integer('email_verified', { mode: 'boolean'}).default(false)
 });
 
 export const session = sqliteTable('session', {
@@ -22,7 +23,7 @@ export const emailVerification = sqliteTable('email_verification', {
 	userId: text('user_id')
 		.notNull()
 		.references(() => users.id),
-	code: text('code').notNull(),
+	verificationCode: text('code').notNull(),
 	email: text('email')
 		.notNull()
 		.references(() => users.email)
