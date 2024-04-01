@@ -9,7 +9,11 @@ import { db } from '$lib/server/database/drizzle';
 import { Argon2id } from 'oslo/password';
 import { lucia } from '$lib/server/auth';
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ locals: {user}, cookies}) => {
+    if (!user) {
+        redirect(302, '/auth/login')
+    }
+
 	return {
 		form: await superValidate(zod(loginSchema))
 	};

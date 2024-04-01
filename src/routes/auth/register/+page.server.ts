@@ -9,6 +9,8 @@ import { db } from '$lib/server/database/drizzle';
 import { users } from '$lib/server/database/schemas/user-schema';
 import { eq } from 'drizzle-orm';
 import { lucia } from '$lib/server/auth';
+import { generateEmailVerificationCode } from '$lib/utils/generateEmailCode';
+import { ResendEmail } from '$lib/utils/resend';
 
 export const load: PageServerLoad = async () => {
 	return {
@@ -62,6 +64,9 @@ export const actions: Actions = {
             })
             .returning({ insertedId: users.id })
             .get();
+
+            const verificationCode = await generateEmailVerificationCode(userId, email);
+            await ResendEmail(email, verificationCode);
 
             const session = await lucia.createSession(insertedId, {});
             const sessionCookie = lucia.createSessionCookie(session.id);
