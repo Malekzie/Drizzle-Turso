@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1711960317864,
+      "tag": "0000_gray_krista_starr",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1711961162783,
+      "tag": "0001_real_sersi",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1711961395210,
+      "tag": "0002_famous_rachel_grey",
+      "breakpoints": true
+    }
+  ]
+}
